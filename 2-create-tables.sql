@@ -1,25 +1,46 @@
--- Usar la DB 
+-- ENTRAR A LA BASE DE DATOS SELECCIONADA
 USE metro_cdmx;
 
 
--- Creacion de tabla "stations"
-CREATE TABLE `stations` (
+
+-- CREAR TABLA DE LINEA DE TRENES
+CREATE TABLE `lines` (
     `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(50) NOT NULL,
+    `name` VARCHAR(10) NOT NULL,
+    `color` VARCHAR(15) NOT NULL,
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_At` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+)
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
 
 
--- Creacion de tabla "trains"
+
+-- CREAR TABLA DE ESTACIONES DE TRENES
+CREATE TABLE `stations` (
+    `id` BIGINT(20),
+    `name` VARCHAR(50) NOT NULL,
+    -- `icon` VARCHAR(100) NOT NULL,
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) 
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+
+
+
+-- CREAR TABLA DE TRENES
 CREATE TABLE `trains` (
-    `serial_number` BIGINT(20) UNSIGNED NOT NULL_INCREMENT,
-    `line_id` VARCHAR(20) NOT NULL,
+    `serial_number` VARCHAR(10) NOT NULL,
+    `line_id` BIGINT(20) UNSIGNED NOT NULL,
     `type` TINYINT(4) NOT NULL,
     `year` INT(4) NOT NULL,
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (serial_number),
-    CONSTRAINT `trains_line_id_foreign`,
+    CONSTRAINT `trains_line_id_foreign` 
     FOREIGN KEY (`line_id`) REFERENCES `lines` (`id`)
-);
+) 
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;

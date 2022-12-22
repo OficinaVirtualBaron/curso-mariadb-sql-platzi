@@ -1,4 +1,5 @@
 USE metro_cdmx;
 
 UPDATE `stations`
-SET 
+SET name = "Tulipanes Verdes"
+WHERE id = 1;
